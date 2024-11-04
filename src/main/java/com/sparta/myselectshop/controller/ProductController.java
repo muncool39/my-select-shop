@@ -5,7 +5,9 @@ import com.sparta.myselectshop.dto.ProductMypriceRequestDto;
 import com.sparta.myselectshop.dto.ProductRequestDto;
 import com.sparta.myselectshop.dto.ProductResponseDto;
 import com.sparta.myselectshop.service.ProductService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,9 +28,16 @@ public class ProductController {
         return productService.createProduct(requestDto);
     }
 
+    // 관심 상품 조회
+    @GetMapping("/products")
+    public List<ProductResponseDto> getProducts() {
+        return productService.getProducts();
+    }
+
     // 관심 상품 희망 최저가 등록
     @PutMapping("/products/{id}")
-    public ProductResponseDto updateProduct(@PathVariable Long id, @RequestBody ProductMypriceRequestDto requestDto) {
+    public ProductResponseDto updateProduct(@PathVariable Long id,
+                                            @RequestBody ProductMypriceRequestDto requestDto) {
         return productService.updateProduct(id, requestDto);
     }
 
